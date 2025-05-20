@@ -2,9 +2,20 @@ pipeline {
   agent any
   stages {
     stage('compile') {
-      steps {
-        sh 'mvn compile'
-        echo 'ddfhsdfksdf'
+      parallel {
+        stage('compile') {
+          steps {
+            sh 'mvn compile'
+            echo 'ddfhsdfksdf'
+          }
+        }
+
+        stage('') {
+          steps {
+            echo 'abcddefff'
+          }
+        }
+
       }
     }
 
