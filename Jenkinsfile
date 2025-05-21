@@ -28,6 +28,11 @@ pipeline {
 
     stage('package') {
       parallel {
+        when {
+            expression {
+                return env.BRANCH_NAME == "main"
+            }
+        }
         stage('package') {
           agent {
             docker {
