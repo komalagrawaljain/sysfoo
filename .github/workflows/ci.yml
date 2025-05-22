@@ -11,7 +11,7 @@ on:
       image_tag:
         description: 'Image tag name'
         required: false
-        default: ''
+        default: 'latest'
 
 jobs:
   build:
