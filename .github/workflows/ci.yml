@@ -106,4 +106,4 @@ jobs:
         COMMIT_HASH=$(echo ${{ github.sha }} | cut -c1-7)
         docker tag docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:$COMMIT_HASH docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:$IMAGE_TAG
         docker push docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:$COMMIT_HASH
-        docker push docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:latest
+        docker push docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:$IMAGE_TAG
