@@ -1,0 +1,5 @@
+- name: Trigger Build with Inputs
+  uses: benc-uk/workflow-dispatch@v1
+  with:
+    workflow: CI Pipeline
+    inputs: '{ "image_tag": ""}'

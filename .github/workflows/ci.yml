@@ -6,6 +6,13 @@ on:
       - main
   pull_request:
 
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Image tag name'
+        required: false
+        default: ''
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -93,8 +100,10 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Push Docker image to DockerHub
+      env:
+        IMAGE_TAG: ${{ github.event.inputs.image_tag || 'latest' }}
       run: |
         COMMIT_HASH=$(echo ${{ github.sha }} | cut -c1-7)
-        docker tag docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:$COMMIT_HASH docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:latest
+        docker tag docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:$COMMIT_HASH docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:${{IMAGE_TAG}}
         docker push docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:$COMMIT_HASH
         docker push docker.io/${{ vars.DOCKERHUB_USERNAME }}/sysfoo:latest
